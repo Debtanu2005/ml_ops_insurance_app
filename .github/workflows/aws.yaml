@@ -52,6 +52,12 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+        
+      - name: Stop and remove old container
+        run: |
+          docker stop insurance_app || true
+          docker rm insurance_app || true
+
       - name: Run Docker Image to serve users
         run: |
           docker run -d \
